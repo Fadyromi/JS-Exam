@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="./CSS/mainstyle.css">
   </head>
   <body>
-    <section class="">
-<!-- <div class="w-100 bg-danger d-flex position-relative ">
+    <section class>
+      <!-- <div class="w-100 bg-danger d-flex position-relative ">
       <button class="btn  reload position-absolute  border-2 border-danger text-danger">Reload</button>
     </div> -->
-    <div class="">
-        <div class="sideNavBar navbar position-fixed d-flex min-vh-100  flex-column justify-content-between ">
+      <div class="">
+        <div
+          class="sideNavBar navbar position-fixed d-flex flex-column justify-content-between ">
           <div class=" navcont1  d-flex flex-column  align-content-between">
             <div class="navTabs p-1">
               <div class="navLinks">
@@ -47,16 +48,16 @@
 
             </div>
           </div>
-          <div
-            class="navHeader  d-flex flex-column justify-content-between align-items-center  text-center px-2 py-4  text-black bg-white ">
+          <aside
+            class="navHeader  d-flex flex-column justify-content-between align-items-center  text-center px-2 py-4  text-black  ">
             <img class="w-75 " src="./img/logo.png" alt="Logo">
-            <i class="fa-solid OCicon fa-align-justify fa-2x"></i>
+            <i class="fa-solid OCicon fa-align-justify fa-2x "></i>
             <div class>
               <i class="fa-solid fa-globe d-block"></i>
               <i class="fa-solid fa-share-nodes"></i>
 
             </div>
-          </div>
+          </aside>
         </div>
         <!-- =============== Test -->
 
@@ -69,7 +70,13 @@
         <div class="min-vh-100 position-relative">
           <div
             class="loadingLogo top-0 start-0 end-0 bottom-0 justify-content-center align-items-center">
-            <i class="fa fa-spinner fa-spin fa-5x"></i>
+            <!-- <i class="fa fa-spinner fa-spin fa-5x"></i> -->
+            <script type="module"
+              src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/quantum.js"></script>
+            <l-quantum
+              size="45"
+              speed="1.75"
+              color="white"></l-quantum>
           </div>
 
           <div class="container">
@@ -79,15 +86,13 @@
           </div>
         </div>
       </div>
-      
+
     </section>
 
-    
-
     <script src="./Js/jquery-3.7.1.min.js"></script>
-    <script src="./Js/Glob.js"></script>
+    <script src="./Js/DisplayFunctions.js"></script>
     <script src="./Js/Validation.js"></script>
     <script src="./Js/Nav.Js"></script>
-    <script src="Js/Daitelis.js"> </script>
+    <script src="./Js/GetFunctios.js"> </script>
   </body>
 </html>

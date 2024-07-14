@@ -6,8 +6,8 @@ function rollOut() {
   }, 500)
 
 
-  $(".OCicon").removeClass("fa-align-justify");
-  $(".OCicon").addClass("fa-x");
+  $(".OCicon").removeClass("fa-align-justify , text-black");
+  $(".OCicon").addClass("fa-x , text-white");
 
 
   for (let i = 0; i < 5; i++) {
@@ -23,13 +23,13 @@ function rollIn() {
       left: -boxWidth
   }, 500)
 
-  $(".OCicon").addClass("fa-align-justify");
-  $(".OCicon").removeClass("fa-x");
+  $(".OCicon").addClass("fa-align-justify , text-black");
+  $(".OCicon").removeClass("fa-x fa-x , text-white");
 
 
   $(".navLinks li").animate({
-      top: 300
-  }, 400)
+      top: 400
+  }, 500)
 }
 
 rollIn()
@@ -65,3 +65,6 @@ $(Contact).click(function () {
   getContactInfo(); rollIn()
   
 });
+
+$('#reload').click(
+  function () { location.reload(); });

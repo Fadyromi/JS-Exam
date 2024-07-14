@@ -17,16 +17,16 @@ $(document).ready(() => {
 
 
 
-function displayMeals(area) {
+function displayMeals(meal) {
     let Void = "";
 
-    for (let i = 0; i < area.length; i++) {
+    for (let i = 0; i < meal.length; i++) {
         Void += `
         <div class="col-md-3">
-                <div onclick="getMealDetails('${area[i].idMeal}')" class="meal position-relative overflow-hidden rounded-2 cursor-pointer">
-                    <img class="w-100" src="${area[i].strMealThumb}" alt="" srcset="">
+                <div onclick="getMealDetails('${meal[i].idMeal}')" class="meal position-relative overflow-hidden rounded-2 cursor-pointer">
+                    <img class="w-100" src="${meal[i].strMealThumb}" alt="" srcset="">
                     <div class="foodCardAnimi position-absolute d-flex align-items-center text-black p-2">
-                        <h3>${area[i].strMeal}</h3>
+                        <h3>${meal[i].strMeal}</h3>
                     </div>
                 </div>
         </div>
@@ -38,33 +38,19 @@ function displayMeals(area) {
 
 
 
-async function getCategories() {
-    try {
-        foodData.innerHTML = ""
-        $(".loadingLogo").fadeIn(300)
-        foodSearch.innerHTML = "";
 
-        let response = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
-        response = await response.json()
 
-        displayCategories(response.categories)
-        $(".loadingLogo").fadeOut(300)
-    } catch {
-        console.error(error)
-    }
-}
-
-function displayCategories(arr) {
+function displayCategories(category) {
     let Void = "";
 
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < category.length; i++) {
         Void += `
         <div class="col-md-3">
-                <div onclick="getCategoryMeals('${arr[i].strCategory}')" class="meal position-relative overflow-hidden rounded-2 cursor-pointer">
-                    <img class="w-100" src="${arr[i].strCategoryThumb}" alt="" srcset="">
+                <div onclick="getCategoryMeals('${category[i].strCategory}')" class="meal position-relative overflow-hidden rounded-2 cursor-pointer">
+                    <img class="w-100" src="${category[i].strCategoryThumb}" alt="" srcset="">
                     <div class="foodCardAnimi position-absolute text-center text-black p-2">
-                        <h3>${arr[i].strCategory}</h3>
-                        <p>${arr[i].strCategoryDescription.split(" ").slice(0, 20).join(" ")}</p>
+                        <h3>${category[i].strCategory}</h3>
+                        <p>${category[i].strCategoryDescription.split(" ").slice(0, 20).join(" ")}</p>
                     </div>
                 </div>
         </div>
@@ -75,23 +61,7 @@ function displayCategories(arr) {
 }
 
 
-async function getArea() {
-    try {
-        foodData.innerHTML = ""
-        $(".loadingLogo").fadeIn(300)
 
-        foodSearch.innerHTML = "";
-
-        let respone = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`)
-        respone = await respone.json()
-        displayArea(respone.meals)
-        $(".loadingLogo").fadeOut(300)
-
-    }
-    catch {
-        console.error(error);
-    }
-}
 
 
 function displayArea(area) {
@@ -112,22 +82,6 @@ function displayArea(area) {
 }
 
 
-async function getIngredients() {
-    try {
-        foodData.innerHTML = ""
-        $(".loadingLogo").fadeIn(300)
-
-        foodSearch.innerHTML = "";
-
-        let respone = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
-        respone = await respone.json()
-
-        displayIngredients(respone.meals.slice(0, 20))
-        $(".loadingLogo").fadeOut(300)
-    } catch {
-        console.error(error);
-    }
-}
 
 
 function displayIngredients(ingre) {
@@ -146,63 +100,6 @@ function displayIngredients(ingre) {
     }
 
     foodData.innerHTML = Void
-}
-
-
-async function getCategoryMeals(category) {
-    foodData.innerHTML = ""
-    $(".loadingLogo").fadeIn(300)
-
-    let response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
-    response = await response.json()
-
-
-    displayMeals(response.meals.slice(0, 20))
-    $(".loadingLogo").fadeOut(300)
-
-}
-
-
-
-async function getAreaMeals(area) {
-    foodData.innerHTML = ""
-    $(".loadingLogo").fadeIn(300)
-
-    let response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`)
-    response = await response.json()
-
-
-    displayMeals(response.meals.slice(0, 20))
-    $(".loadingLogo").fadeOut(300)
-
-}
-
-
-async function getIngredientsMeals(ingredients) {
-    foodData.innerHTML = ""
-    $(".loadingLogo").fadeIn(300)
-
-    let response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredients}`)
-    response = await response.json()
-
-
-    displayMeals(response.meals.slice(0, 20))
-    $(".loadingLogo").fadeOut(300)
-
-}
-
-async function getMealDetails(mealID) {
-    rollIn()
-    foodData.innerHTML = ""
-    $(".loadingLogo").fadeIn(300)
-
-    foodSearch.innerHTML = "";
-    let respone = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`);
-    respone = await respone.json();
-
-    displayMealDetails(respone.meals[0])
-    $(".loadingLogo").fadeOut(300)
-
 }
 
 
@@ -267,7 +164,7 @@ function displayMealDetails(meal) {
 function goToSearch() {
     foodSearch.innerHTML = `
     <div class="w-100 bg-danger d-flex position-relative ">
-      <button class="btn  reload position-absolute  border-2 border-danger text-danger">Reload</button>
+      <button id="reload" class="btn  reload position-absolute  border-2 border-danger text-danger">Reload</button>
     </div>
     <div class="row py-4 ">
         <div class="col-md-6 ">
@@ -282,33 +179,44 @@ function goToSearch() {
 }
 
 async function nameSearch(name) {
-    rollIn()
-    foodData.innerHTML = ""
-    $(".loadingLogo").fadeIn(300)
+    try {
 
-    let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
-    response = await response.json()
+        rollIn()
+        foodData.innerHTML = ""
+        $(".loadingLogo").fadeIn(300)
 
-    response.meals ? displayMeals(response.meals) : displayMeals([])
-    $(".loadingLogo").fadeOut(300)
+        let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
+        response = await response.json()
+        console.log(response);
+        response.meals ? displayMeals(response.meals) : displayMeals([])
+        $(".loadingLogo").fadeOut(300)
+
+
+    } catch {
+        console.error(error);
+    }
 
 }
 
 async function firstLetterSearch(fLEnter) {
-    rollIn()
-    foodData.innerHTML = ""
-    $(".loadingLogo").fadeIn(300)
+    try {
+        rollIn()
+        foodData.innerHTML = ""
+        $(".loadingLogo").fadeIn(300)
 
-    fLEnter == "" ? fLEnter = "a" : "";
-    let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${fLEnter}`)
-    response = await response.json()
+        fLEnter = fLEnter === "" ? "a" : fLEnter;
+        let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${fLEnter}`)
+        response = await response.json()
+        console.log(response);
+        response.meals ? displayMeals(response.meals) : displayMeals([])
+        $(".loadingLogo").fadeOut(300)
 
-    response.meals ? displayMeals(response.meals) : displayMeals([])
-    $(".loadingLogo").fadeOut(300)
+
+    } catch {
+        console.error(error);
+    }
 
 }
 
 
 
-$('.reload').click(
-    function () { location.relo

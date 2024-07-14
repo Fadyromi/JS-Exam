@@ -6,7 +6,7 @@
 function getContactInfo() {
     foodData.innerHTML = `
     <div class="w-100 bg-danger d-flex position-relative ">
-      <button class="btn  reload position-absolute  border-2 border-danger text-danger">Reload</button>
+      <button id="reload" class="btn  reload position-absolute  border-2 border-danger text-danger">Reload</button>
     </div>
     <div class="contact min-vh-100 d-flex justify-content-center align-items-center">
     <div class="container w-75 text-center">
@@ -89,6 +89,34 @@ let reEnterPasswordEntryTouched = false;
 
 
 
+
+function nameValidation() {
+    return (/^[a-zA-Z ]+$/.test(document.getElementById("nameEntry").value))
+}
+
+function emailValidation() {
+    return (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(document.getElementById("EmailEntry").value))
+}
+
+function phoneValidation() {
+    return (/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(document.getElementById("phoneNumEntry").value))
+}
+
+function ageValidation() {
+    return (/^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|200)$/.test(document.getElementById("ageEntry").value))
+}
+
+function passwordValidation() {
+    return (/^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/.test(document.getElementById("passwordEntry").value))
+}
+
+function repasswordValidation() {
+   
+        return document.getElementById("repasswordInput").value === document.getElementById("passwordInput").value
+    
+}
+
+
 function validationCheck() {
     if (nameEntryTouched) {
         if (nameValidation()) {
@@ -155,30 +183,4 @@ function validationCheck() {
     } else {
         subButton.setAttribute("disabled", true)
     }
-}
-
-function nameValidation() {
-    return (/^[a-zA-Z ]+$/.test(document.getElementById("nameEntry").value))
-}
-
-function emailValidation() {
-    return (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(document.getElementById("EmailEntry").value))
-}
-
-function phoneValidation() {
-    return (/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(document.getElementById("phoneNumEntry").value))
-}
-
-function ageValidation() {
-    return (/^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|200)$/.test(document.getElementById("ageEntry").value))
-}
-
-function passwordValidation() {
-    return (/^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/.test(document.getElementById("passwordEntry").value))
-}
-
-function repasswordValidation() {
-   
-        return document.getElementById("repasswordInput").value === document.getElementById("passwordInput").value
-    
 }
